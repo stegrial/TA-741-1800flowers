@@ -25,9 +25,13 @@ Dir[File.join(spec_dir, 'support/**/*.rb')].each {|f| require f}
 
 RSpec.configure do |config|
   caps_chrome = Selenium::WebDriver::Remote::Capabilities.chrome
-  caps_chrome['chromeOptions'] = {}
-  caps_chrome['chromeOptions']['args'] = ['--disable-notifications']
-  caps_chrome['chromeOptions']['mobileEmulation'] = {'deviceName' => 'iPhone 5'}
+  caps_chrome['goog:chromeOptions'] = {}
+  caps_chrome['goog:chromeOptions']['args'] = ['--disable-notifications']
+
+  # caps_chrome = Selenium::WebDriver::Remote::Capabilities.chrome
+  # caps_chrome['chromeOptions'] = {}
+  # caps_chrome['chromeOptions']['args'] = ['--disable-notifications']
+  # caps_chrome['chromeOptions']['mobileEmulation'] = {'deviceName' => 'iPhone 5'}
 
   Capybara.register_driver :true_automation_driver do |app|
     TrueAutomation::Driver::Capybara.new(app, desired_capabilities: caps_chrome)
